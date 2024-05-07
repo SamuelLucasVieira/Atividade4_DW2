@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import { RandonContextProps } from "../types";
+import { MenuProps, RandonContextProps } from "../types";
 import { darkTheme, lightTheme } from "../styles/theme";
 
 export const RandomContext = createContext({} as RandonContextProps)
 
-export function RandomProvider({children}:any){
+export function RandomProvider({children}:MenuProps){
     const[theme,setTheme] = useState(lightTheme);
     const [numbers, setNumbers] = useState<string[]>([])
     
@@ -19,9 +19,10 @@ export function RandomProvider({children}:any){
     function toggleTheme (){
         if(theme.name ==="light"){
             setTheme(darkTheme);
-            localStorage.setItem("theme",JSON.stringify(theme));
+            localStorage.setItem("theme",JSON.stringify(darkTheme));
         }
         else{
+            localStorage.setItem("theme",JSON.stringify(lightTheme));
             setTheme(lightTheme);
         }
     }
